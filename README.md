@@ -9,11 +9,6 @@ The software and data in this repository are a snapshot of the software and data
 that were used in the research reported on in the paper 
 [From an Interior Point to a Corner Point: Smart Crossover](https://doi.org/10.1287/ijoc.2022.0291) by Dongdong Ge, Chengwenjian Wang, Zikai Xiong, Yinyu Ye. 
 
-
-**Important: This code is being developed on an on-going basis at 
-https://github.com/wcwj0147/smart-crossover. Please go there if you would like to
-get a more recent version or would like support**
-
 ## Cite
 
 To cite the contents of this repository, please cite both the paper and this repo, using their respective DOIs.
@@ -87,8 +82,4 @@ Install the Jupyter kernel:
 
 Open `/notebooks/example.ipynb`, activate the environment, and run the notebook to test the algorithm.
 
-## Ongoing Development
-
-This code is being developed on an on-going basis at the author's
-[Github site](https://github.com/wcwj0147/smart-crossover).
 
