@@ -11,7 +11,7 @@ that were used in the research reported on in the paper
 
 
 **Important: This code is being developed on an on-going basis at 
-https://github.com/tkralphs/JoCTemplate. Please go there if you would like to
+https://github.com/wcwj0147/smart-crossover. Please go there if you would like to
 get a more recent version or would like support**
 
 ## Cite
