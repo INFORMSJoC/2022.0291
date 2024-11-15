@@ -43,10 +43,11 @@ The goal of this software is to implement the crossover algorithms proposed in t
 
 `smart_crossover.output` and `smart_crossover.timer` are output and timer classes.
 
-There are two major algorithms included:
-the network crossover methods in 
-`smart_crossover.network_methods` and perturbation crossover
+The two main algorithms included:
+the **network crossover** methods in 
+`smart_crossover.network_methods` and **perturbation crossover**
 methods in `smart_crossover.lp_methods`. 
+
 In both cases, there is a `algorithm` module that contains the main algorithm
 and a `managemer` module that provides utilities for managing the algorithm.
 
