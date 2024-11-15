@@ -44,7 +44,7 @@ class FileHandler:
             self.models.append(self.grbCaller.model)
 
     def read_mcf_bm_from_files(self) -> None:
-        """ Read mcf benchmark models."""
+        """ Read mcf benchmark models from location: data/network. """
         path = str(get_project_root() / f"data/network")
         self.read_models_from_files(path)
 
@@ -54,12 +54,19 @@ class FileHandler:
 
         Args:
             file_type: choose from {"all", "standard", "presolved"}
+
         """
         path = str(get_project_root() / f"data/lp/{file_type}")
         self.read_models_from_files(path)
 
     def write_presolved_models(self, path: str = str(get_project_root() / "data/lp/presolved")) -> None:
-        """ Presolve saved models using Gurobi and write them to the given path."""
+        """
+        Presolve models using Gurobi and write them to the given path.
+
+        Args:
+            path: the path to save presolved models.
+
+        """
         for model in self.models:
             print(f"Consider model: {model.ModelName}")
             presolved_model = model.relax().presolve()
@@ -78,25 +85,17 @@ class FileHandler:
         return report_str
 
     def get_model_by_name(self, model_name: str) -> gurobipy.Model:
-        """ Get a model by its name."""
+        """ Get a model by its name. """
         for model in self.models:
             if model.ModelName == model_name:
                 return model
         raise ValueError(f"Model {model_name} not found.")
 
     def get_lp_by_name(self, model_name: str) -> GeneralLP:
-        """ Get a model by its name."""
+        """ Get a model by its name. """
         model = self.get_model_by_name(model_name)
         self.grbCaller.read_model(model)
         return self.grbCaller.return_genlp()
-
-    def plot_A_mat(self, name: str) -> None:
-        lp = self.get_lp_by_name(name)
-        A = lp.A
-        plt.figure(figsize=(12, 12))
-        plt.spy(A, markersize=0.1)
-        plt.show()
-        return
 
 
 def read_results_from_pickle(path: str) -> Any:

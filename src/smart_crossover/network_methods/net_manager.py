@@ -12,37 +12,104 @@ from smart_crossover.solver_caller.solving import solve_mcf
 
 
 class NetworkManager(Protocol):
-    """ A protocol for network problem managers, including MinCostFlow and OptimalTransport. """
+    """ A protocol for network problem managers, including MinCostFlow and OptimalTransport.
+
+    Attributes:
+        m: The number of constraints in the original network problem.
+        n: The number of variables in the original network problem.
+        basis: The current basis solved from a subproblem.
+    """
 
     m: int
     n: int
     basis: Basis
 
     def get_sorted_flows(self, x: np.ndarray) -> Tuple[np.ndarray, np.ndarray]:
+        """ Get the sorted flows by calculating flow indicators.
+
+        Args:
+            x: A (non-vertex) flow solution of the network problem.
+
+        Returns:
+            A tuple of two arrays: the first array is the sorted indices of flows, and the second array is the flow indicators.
+        """
         ...
 
     def recover_x_from_sub_x(self, x_sub: np.ndarray) -> np.ndarray:
+        """ Recover the solution of the original network problem from the solution of the subproblem.
+
+        Args:
+            x_sub: A solution of the subproblem.
+
+        Returns:
+            The corresponding solution of the original network problem.
+        """
         ...
 
     def recover_basis_from_sub_basis(self, basis_sub: Basis) -> Basis:
+        """ Recover the basis of the original network problem from the basis of the subproblem.
+
+        Args:
+            basis_sub: A basis of the subproblem.
+
+        Returns:
+            The corresponding basis of the original network problem.
+        """
         ...
 
     def solve_subproblem(self, solver: str, solver_settings: SolverSettings) -> Output:
+        """ Solve the subproblem of the network problem.
+
+        Args:
+            solver: The solver to use.
+            solver_settings: The settings for the solver.
+
+        Returns:
+            The output of the subproblem solution.
+        """
         ...
 
     def recover_obj_val(self, obj_val: float) -> float:
+        """ Recover the objective value of the original network problem from the objective value of the subproblem.
+
+        Args:
+            obj_val: The objective value of the subproblem.
+
+        Returns:
+            The corresponding objective value of the original network problem.
+        """
         ...
 
     def check_optimality_condition(self, x: np.ndarray, y: np.ndarray) -> bool:
+        """ Check the optimality condition for the original network problem with a pair of primal-dual solution (x, y) for the subproblem.
+
+        Args:
+            x: A primal solution of the subproblem.
+            y: A dual solution of the subproblem.
+
+        Returns:
+            True if the optimality condition is satisfied; False otherwise.
+        """
         ...
 
     def add_free_variables(self, ind_free: np.ndarray) -> None:
+        """ Add free variables (here free means free to change values) to the subproblem of the network problem.
+
+        Args:
+            ind_free: The indices of free variables to add.
+        """
         ...
 
     def update_subproblem(self):
+        """ Update the subproblem of the network problem, after fixing or freeing several variables."""
         ...
 
     def set_basis(self, basis: Basis) -> None:
+        """ Set a feasible basis for the current subproblem.
+
+        Args:
+            basis: The basis to set.
+        """
         ...
 
 
@@ -173,7 +240,7 @@ class MCFManagerStd():
         return rcost
 
     def check_optimality_condition(self, x: np.ndarray, y: np.ndarray) -> bool:
-        """ Check the optimality condition for the current LP and a pair of primal-dual solution (x, y). """
+        """ Check the optimality condition for the current LP with a pair of primal-dual solution (x, y). """
         artificial_vars_condition = np.all(
             x[self.artificial_vars] < TOLERANCE_FOR_ARTIFICIAL_VARS) if self.artificial_vars.size > 0 else True
         rcost_condition = np.all(self.get_reduced_cost_for_original_mcf(y) >= -TOLERANCE_FOR_REDUCED_COSTS)
