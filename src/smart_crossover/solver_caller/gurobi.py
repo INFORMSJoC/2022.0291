@@ -14,7 +14,7 @@ from smart_crossover.solver_caller.caller import SolverCaller, SolverSettings
 
 class GrbCaller(SolverCaller):
     model: gurobipy.Model
-    """Gurobi runner."""
+    """Gurobi caller."""
 
     def __init__(self,
                  solver_settings: Optional[SolverSettings] = SolverSettings()) -> None:

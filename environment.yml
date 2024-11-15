@@ -2,7 +2,7 @@ name: smart_crossover
 
 channels:
   - conda-forge
-  - gurobi
+  - gurobi=9.0.3
 
 dependencies:
   - python=3.7.16
