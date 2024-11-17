@@ -20,5 +20,5 @@ There are also instances can be downloaded from the following links:
 [graph20-80-1rand](https://miplib.zib.de/instance_details_graph20-80-1rand.html),
 [graph40-20-1rand](https://miplib.zib.de/instance_details_graph40-20-1rand.html),
 [graph40-40-1rand](https://miplib.zib.de/instance_details_graph40-40-1rand.html),
-and [graph40-80-1rand](https://miplib.zib.de/instance_details_graph40-80-1rand.html)
-Then use `file_handler.FileHandler.write_presolved_models` to generate the presolved instances.
+and [graph40-80-1rand](https://miplib.zib.de/instance_details_graph40-80-1rand.html).
+Then, you may use `file_handler.FileHandler.write_presolved_models` to generate the presolved instances.
