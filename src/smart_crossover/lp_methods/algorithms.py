@@ -206,8 +206,14 @@ def check_perturb_output_precision(sublp_manager: LPManager,
                                    x_ptb: np.ndarray,
                                    c_ori: np.ndarray,
                                    barrier_obj: float) -> bool:
-    """Check if the perturbation is precise enough."""
+    """Check if the solution of the perturbation problem (x_ptb) is precise enough.
 
+    Args:
+        sublp_manager: The LP manager of the subproblem.
+        x_ptb: The solution of the perturbed subproblem.
+        c_ori: The original objective function.
+        barrier_obj: The objective value of the barrier solution.
+    """
     x = sublp_manager.get_orix(x_ptb)
     my_primal_obj = c_ori @ x
     primal_dual_gap = abs(my_primal_obj - barrier_obj)
@@ -219,7 +225,11 @@ def check_perturb_output_precision(sublp_manager: LPManager,
 
 
 def check_feasibility_problem(lp: GeneralLP) -> bool:
-    """ Check if the problem is a feasibility problem. """
+    """ Check if the problem is a feasibility problem.
+
+    Args:
+        lp: The LP problem to check.
+    """
     proj_c = get_projector_c(lp)
     if np.linalg.norm(proj_c) / np.linalg.norm(lp.c) < PROJECTOR_THRESHOLD:
         print("*** The problem is a feasibility problem. ***")
